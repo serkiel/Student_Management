@@ -1,7 +1,8 @@
 package com.g3appdev.JISsus.entity;
 
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Student")
@@ -29,13 +30,13 @@ public class Student {
     @Column(nullable = false, unique = true)
     private String email;
 
-    // Getters and Setters
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    @JsonManagedReference  // This will manage serialization
+    private List<AttendanceRecord> attendanceRecords;
+
+
     public int getStudentID() {
         return StudentID;
-    }
-
-    public void setStudentID(int studentID) {
-        StudentID = studentID;
     }
 
     public int getSeatID() {
@@ -85,5 +86,12 @@ public class Student {
     public void setEmail(String email) {
         this.email = email;
     }
-}
 
+    public List<AttendanceRecord> getAttendanceRecords() {
+        return attendanceRecords;
+    }
+
+    public void setAttendanceRecords(List<AttendanceRecord> attendanceRecords) {
+        this.attendanceRecords = attendanceRecords;
+    }
+}

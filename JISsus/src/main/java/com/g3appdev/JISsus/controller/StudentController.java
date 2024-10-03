@@ -1,6 +1,5 @@
 package com.g3appdev.JISsus.controller;
 
-
 import com.g3appdev.JISsus.entity.Student;
 import com.g3appdev.JISsus.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +23,14 @@ public class StudentController {
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
     }
-}
 
+    @PutMapping("/update/{id}")
+    public Student putStudentDetails(@PathVariable int id, @RequestBody Student newStudentDetails) {
+        return studentService.putStudentDetails(id, newStudentDetails);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteStudent(@PathVariable int id) {
+        studentService.deleteStudent(id);
+    }
+}
